@@ -7,6 +7,11 @@ const PORT = parseInt(process.env.PORT) || 3000
 // Create an instance of express
 const app = express()
 
+// GET /time
+app.get('/time', (req, resp) => {
+   resp.send({ time: (new Date()).toISOString() })
+})
+
 // Serve files in the static directory
 app.use(express.static(__dirname + '/static'))
 
