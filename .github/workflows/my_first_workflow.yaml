@@ -1,0 +1,19 @@
+# this is the name of the workflow
+name: My first workflow
+on:
+  # any push will trigger this workflow
+- push
+
+jobs:
+   my_first_ci:
+      # from this point onwards its Ubuntu
+      runs-on: ubuntu-latest
+
+      steps:
+      - name: get date in Github
+        id: get_date_in_github
+        run: echo "date in github $(date)"
+
+      - name: list directory
+        id: list_directory 
+        run: echo "$(ls -l)"
