@@ -5,8 +5,13 @@ const { engine } = require('express-handlebars')
 const PORT = parseInt(process.env.PORT) || 3000
 
 // Create an instance of express
-const app = express()
+const myapp = express()
 
-app.listen(PORT, () => {
+myapp.engine('html', engine())
+myapp.set('view engine', 'html')
+
+myapp.use(express.static(__dirname + '/static'))
+
+myapp.listen(PORT, () => {
    console.info(`Application started on port ${PORT} at ${new Date()}`)
 })
