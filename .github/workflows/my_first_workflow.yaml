@@ -18,6 +18,23 @@ jobs:
         id: list_directory 
         run: echo "$(ls -l)"
 
+      - name: fail the job
+        id: fail_the_job
+        run: exit 0
+
       - name: echo github context
         id: echo_github_context
         run: echo "ref_name ${{ github.ref_name }}\n repository ${{ github.repository}}\n owner ${{ github.repository_owner }}"
+
+      - name: send email 
+        id: send_email
+        uses: dawidd6/action-send-mail@v3
+        with:
+         server_address: ${{ secrets.EMAIL_SERVER }}
+         server_port: ${{ secrets.EMAIL_PORT }}
+         username: ${{ secrets.EMAIL_USER }}
+         password: ${{ secrets.EMAIL_PASSWORD }}
+         to: 4cb38cb7-b2ed-4211-a263-cd579c8ef591@mailslurp.mx
+         from: chuk@gmail.com
+         subject: "Github workflow from ${{ github.ref_name }}"
+         body: "The job is ${{ job.status }}"
